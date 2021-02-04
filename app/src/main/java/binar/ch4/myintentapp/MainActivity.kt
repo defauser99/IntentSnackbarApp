@@ -2,6 +2,7 @@ package binar.ch4.myintentapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import binar.ch4.myintentapp.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                 binding!!.commentLayout.editText?.text?.clear()
                 Snackbar.make(binding!!.root, "Comment Deleted", Snackbar.LENGTH_LONG).setAction("Undo") {
                     binding!!.commentLayout.editText?.setText(temp)
+                    Toast.makeText(this, "Undo Successful", Toast.LENGTH_SHORT).show()
                 }.show()
             }
         }
