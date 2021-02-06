@@ -41,6 +41,11 @@ class CustomDialogFragment : DialogFragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
