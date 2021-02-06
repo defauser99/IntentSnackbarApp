@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Ok, We will remind you later",Toast.LENGTH_SHORT).show()
             dialogInterface.dismiss()
         }
-        actionDialog.create().show()
+        //actionDialog.create().show()
 
         //Custom Dialog
         val customDialogView = CustomDialogLayoutBinding.inflate(layoutInflater)
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Welcome, $name",Toast.LENGTH_SHORT).show()
             customDialog.dismiss()
         }
-        customDialog.show()
+        //customDialog.show()
 
         //Dialog Fragment
         val customDialogFragment = CustomDialogFragment()
