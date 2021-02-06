@@ -47,6 +47,7 @@ class CustomDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.textView2.text = param1
         binding.button.setOnClickListener {
             Toast.makeText(activity, "OKE", Toast.LENGTH_SHORT).show()
             dismiss()

@@ -40,48 +40,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Standard Dialog
-        val standardDialog = AlertDialog.Builder(this)
-        standardDialog.setTitle("Standard Dialog")
-        standardDialog.setMessage("Click anywhere to close")
-        standardDialog.setCancelable(true)
-        //standardDialog.show()
+        //showStandardDialog("Welcome", "Click anywhere to close")
 
         //Action Dialog
-        val actionDialog = AlertDialog.Builder(this)
-        actionDialog.setTitle("Action Dialog")
-        actionDialog.setMessage("Do you enjoy using this app? Please rate this app")
-        actionDialog.setIcon(R.drawable.ic_baseline_star_rate_24)
-        actionDialog.setCancelable(false)
-        actionDialog.setPositiveButton("Sure"){ dialogInterface, _ ->
-            Toast.makeText(this,"Thank you!",Toast.LENGTH_SHORT).show()
-            dialogInterface.dismiss()
-        }
-        actionDialog.setNegativeButton("No, Thank You"){ dialogInterface, _ ->
-            Toast.makeText(this, "Dialog closed",Toast.LENGTH_SHORT).show()
-            dialogInterface.dismiss()
-        }
-        actionDialog.setNeutralButton("Remind me, Later"){ dialogInterface, _ ->
-            Toast.makeText(this, "Ok, We will remind you later",Toast.LENGTH_SHORT).show()
-            dialogInterface.dismiss()
-        }
-        //actionDialog.create().show()
+        //showActionDialog("Do you enjoyed this app?", "Would you like to rate this app?")
 
         //Custom Dialog
-        val customDialogView = CustomDialogLayoutBinding.inflate(layoutInflater)
-        val customDialogBuilder = AlertDialog.Builder(this)
-        customDialogBuilder.setView(customDialogView.root)
-        val customDialog = customDialogBuilder.create()
-        customDialogView.textView.text = "Who are you?"
-        customDialogView.btnSubmit.setOnClickListener {
-            val name = customDialogView.editName.text?.toString()
-            Toast.makeText(this, "Welcome, $name",Toast.LENGTH_SHORT).show()
-            customDialog.dismiss()
-        }
-        //customDialog.show()
+        showCustomDialog("Hello, who are you?")
 
-        //Dialog Fragment
-        val customDialogFragment = CustomDialogFragment()
-        customDialogFragment.show(supportFragmentManager, "custom")
+        //Fragment Dialog
+        //showFragmentDialog("This is fragment dialog")
     }
 
     private fun shareIntent(comment: String) {
@@ -111,5 +79,53 @@ class MainActivity : AppCompatActivity() {
             //intent.putExtra("AN_OBJECT", person2)
         }
         startActivity(intent)
+    }
+
+    private fun showStandardDialog(title:String, message:String){
+        val standardDialog = AlertDialog.Builder(this)
+        standardDialog.setTitle(title)
+        standardDialog.setMessage(message)
+        standardDialog.setCancelable(true)
+        standardDialog.show()
+    }
+
+    private fun showActionDialog(title:String, message:String){
+        val actionDialog = AlertDialog.Builder(this)
+        actionDialog.setTitle(title)
+        actionDialog.setMessage(message)
+        actionDialog.setIcon(R.drawable.ic_baseline_star_rate_24)
+        actionDialog.setCancelable(false)
+        actionDialog.setPositiveButton("Sure"){ dialogInterface, _ ->
+            Toast.makeText(this,"Thank you",Toast.LENGTH_SHORT).show()
+            dialogInterface.dismiss()
+        }
+        actionDialog.setNegativeButton("No, thank you"){ dialogInterface, _ ->
+            Toast.makeText(this, "Dialog closed",Toast.LENGTH_SHORT).show()
+            dialogInterface.dismiss()
+        }
+        actionDialog.setNeutralButton("Remind me, later"){ dialogInterface, _ ->
+            Toast.makeText(this, "Ok, we will remind you later",Toast.LENGTH_SHORT).show()
+            dialogInterface.dismiss()
+        }
+        actionDialog.create().show()
+    }
+
+    private fun showCustomDialog(title:String){
+        val customDialogView = CustomDialogLayoutBinding.inflate(layoutInflater)
+        val customDialogBuilder = AlertDialog.Builder(this)
+        customDialogBuilder.setView(customDialogView.root)
+        val customDialog = customDialogBuilder.create()
+        customDialogView.textView.text = title
+        customDialogView.btnSubmit.setOnClickListener {
+            val name = customDialogView.editName.text?.toString()
+            Toast.makeText(this, "Welcome, $name",Toast.LENGTH_SHORT).show()
+            customDialog.dismiss()
+        }
+        customDialog.show()
+    }
+
+    private fun showFragmentDialog(title:String){
+        val customDialogFragment = CustomDialogFragment.newInstance(title,"")
+        customDialogFragment.show(supportFragmentManager, "custom")
     }
 }
